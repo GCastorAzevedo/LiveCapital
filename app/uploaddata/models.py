@@ -1,6 +1,6 @@
 from django.db import models
 
-class Form(models.Model):
+class Item(models.Model):
     # purchaser name
     purchaser_name = models.CharField(max_length=200)
     # item description
