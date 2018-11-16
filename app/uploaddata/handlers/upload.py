@@ -4,41 +4,49 @@ import pandas as pd
 from ..models import Item
 
 def handle_uploaded_file(f):
-    content = f.read()
-    #df = pd.read_csv(io.BytesIO(wells), encoding='utf8', sep=" ", index_col="id", dtype={"switch": np.int8})
     try:
-        data = pd.read_csv(io.BytesIO(content), sep="\t", header=0)
-        return content
+        content = f.read()
+        ok = check_file(content)
+        if ok:
+            data = raw_file_to_pandas(content)
+            for _, row in data.iterrows():
+                item_dict = row_to_db_item(row)
+                saved = save_to_db(item_dict)
+            return {
+                'status': ok
+            }
+        else:
+            return {
+                'status': ok
+            }
+
     except Exception as e:
-        raise e
+        return {
+            'status': False,
+            'error': e
+        }
 
-def parse_raw_content_file(f):
-    # do somethinf with f
-    parsed_content = f.read()
-    return parsed_content
+# Checks if content is well parsed.
+def check_file(content):
+    return True
 
-def save_to_db(data):
-    item = Item.objects.create(**data)
-    item.save()
-"""
-fruit = Fruit.objects.create(name='Apple')
->>> fruit.name = 'Pear'
->>> fruit.save()
->>> Fruit.objects.values_list('name', flat=True)
+# Converts raw bytes string to pandas dataframe.
+def raw_file_to_pandas(content):
+    data = pd.read_csv(io.BytesIO(content), sep="\t", header=0, encoding='utf-8')
+    new_columns = [ col.replace(' ', '_') for col in data.columns ]
+    data.columns = new_columns
+    return data
 
-purchaser_name = models.CharField(max_length=200)
-    # item description
-    item_description = models.CharField(max_length=400)
-    # item price
-    item_price = models.IntegerField(default=0)
-    # purchase count
-    purchase_count = models.IntegerField(default=1)
-    # merchant address
-    merchant_address = models.CharField(max_length=600)
-    # merchant name
-    merchant_name = models.CharField(max_length=400)
-    # date time
-    pub_date = models.DateTimeField('date published')
+def row_to_db_item(row):
+    item_dict = row.to_dict()
+    return item_dict
 
-"""
+# Saves each line of pandas dataframe to db.
+def save_to_db(item_dict):
+    try:
+        new_item = Item.objects.create(**item_dict)
+        new_item.save()
+        return True
+    except Exception:
+        return False
 

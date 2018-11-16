@@ -14,4 +14,4 @@ class Item(models.Model):
     # merchant name
     merchant_name = models.CharField(max_length=400)
     # date time
-    pub_date = models.DateTimeField('date published')
+    pub_date = models.DateTimeField(auto_now_add=True, blank=True)
