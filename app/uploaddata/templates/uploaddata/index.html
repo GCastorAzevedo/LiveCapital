@@ -1,0 +1,10 @@
+<style>
+    form {}
+</style>
+<a href="{% url 'upload' %}">Go</a>
+<form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="{{ input_file_id }}"> Insira o arquivo com seus dados </label>
+    <input type="file" id="{{ input_file_id }}" name="{{ input_file_name }}" accept=".doc,.csv,.txt,.tab"  />
+    <input type="submit" value="Envia"/>
+</form>
