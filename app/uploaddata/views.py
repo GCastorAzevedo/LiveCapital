@@ -23,31 +23,3 @@ def upload(request):
             return render(request, 'uploaddata/upload.html', { 'status': status })
     
     return HttpResponseRedirect('/')
-
-"""
-print('hi')
-            #if status:
-            #    return HttpResponseRedirect('/insert/succes/')
-            #else:
-            #    return HttpResponseRedirect('/insert/')
-
-def detail(request, id):
-    response = "Look this nice detail %s."
-    return HttpResponse(response % id)
-
-def results(request, id):
-    response = "This is a nice id: %s."
-    return HttpResponse(response % id)
-
-def insert(request):
-    #body_unicode = request.body.decode('utf-8')
-    #body = json.loads(body_unicode)
-    #content = body['content']
-    response = request.body
-    body = json.loads(response)
-    #file_ = request.FILE
-    message = "see the values found \n \n %s \n \n %s" 
-    
-    return HttpResponse(message % (body))
-
-"""

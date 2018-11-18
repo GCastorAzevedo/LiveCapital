@@ -4,21 +4,46 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>LiveCapital challenge solution</title>
-    <link rel="stylesheet" type="text/css" href="./index.css" />
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'uploaddata/index.css' %}" />
     {% load bootstrap4 %}
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
     {% bootstrap_messages %}
+    <style>
+    </style>
 </head>
 <body>
-    <section>
-        <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data" class="form">
-            {% csrf_token %}
-            <label for="{{ input_file_id }}"> Insira o arquivo com seus dados </label>
-            <input type="file" id="{{ input_file_id }}" name="{{ input_file_name }}" accept=".doc,.csv,.txt,.tab"  />
-            {# <input type="submit" value="Envia"/> #}
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+    <section id="index-section-1">
+        <div class="container-fluid h-100">
+            <div class="row align-items-center h-100">
+                <div class="mx-auto">
+                    <div class="card mx-auto">
+                        <div class="card-body">
+                            <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data" class="form">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="{{ input_file_id }}" class="card-title">Faça upload dos dados</label>
+                                    <input 
+                                        id="{{ input_file_id }}"
+                                        name="{{ input_file_name }}"
+                                        type="file"
+                                        value="Selecione o arquivo"
+                                        class="form-control-file"
+                                        accept=".doc,.csv,.txt,.tab"
+                                    />
+                                </div>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+    <section id="index-section-2">
+            <div class="container-fluid h-100">
+            </div>
+        </section>
 </body>
 </html>
