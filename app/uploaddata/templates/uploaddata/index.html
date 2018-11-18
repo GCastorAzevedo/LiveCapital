@@ -1,9 +1,24 @@
-<style>
-    form {}
-</style>
-<form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <label for="{{ input_file_id }}"> Insira o arquivo com seus dados </label>
-    <input type="file" id="{{ input_file_id }}" name="{{ input_file_name }}" accept=".doc,.csv,.txt,.tab"  />
-    <input type="submit" value="Envia"/>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LiveCapital challenge solution</title>
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
+</head>
+<body>
+    <section>
+        <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data" class="form">
+            {% csrf_token %}
+            <label for="{{ input_file_id }}"> Insira o arquivo com seus dados </label>
+            <input type="file" id="{{ input_file_id }}" name="{{ input_file_name }}" accept=".doc,.csv,.txt,.tab"  />
+            {# <input type="submit" value="Envia"/> #}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+</body>
+</html>

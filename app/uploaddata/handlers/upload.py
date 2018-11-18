@@ -19,7 +19,7 @@ def handle_uploaded_file(f):
                 saved = save_to_db(item_dict)
                 if saved:
                     logger.info("saved new item to db: \n %s " % item_dict)
-                    content.push(item_dict)
+                    content.append(item_dict)
             return {
                 'status': ok,
                 'message': "Saved the following uploaded items.",
@@ -38,6 +38,7 @@ def handle_uploaded_file(f):
             'error': e
         }
 
+# TODO: fill check's logic
 # Checks if content is well parsed.
 def check_file(content):
     return True
