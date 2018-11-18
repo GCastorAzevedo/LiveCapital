@@ -1,5 +1,9 @@
 import io
+import logging
 import pandas as pd
+
+logger = logging.getLogger(__name__)
+# logger.error('Something went wrong!')
 
 from ..models import Item
 
@@ -9,20 +13,28 @@ def handle_uploaded_file(f):
         ok = check_file(content)
         if ok:
             data = raw_file_to_pandas(content)
+            content = []
             for _, row in data.iterrows():
                 item_dict = row_to_db_item(row)
                 saved = save_to_db(item_dict)
+                if saved:
+                    logger.info("saved new item to db: \n %s " % item_dict)
+                    content.push(item_dict)
             return {
-                'status': ok
+                'status': ok,
+                'message': "Saved the following uploaded items.",
+                'content': content
             }
         else:
             return {
-                'status': ok
+                'status': ok,
+                'message': "File format not recognized."
             }
 
     except Exception as e:
         return {
             'status': False,
+            'message': "Could not open uploaded file.",
             'error': e
         }
 
