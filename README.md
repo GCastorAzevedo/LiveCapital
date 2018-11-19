@@ -5,8 +5,8 @@ Live Capital challenge. A small app designed in Django.
 ```console
   > virtualenv .
   > source bin/activate
+  > cd app
   > pip install -r requirements.txt
-  > cd app && \
   > python manage.py migrate && \
   > python manage.py runserver
 
