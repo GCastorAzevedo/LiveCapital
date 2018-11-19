@@ -1,5 +1,6 @@
 start:
 	echo 'Be sure to initialize virtualenv'
+	pip install -r requirements.txt
 	python manage.py migrate
 	python manage.py collectstatic --no-input
 	docker-compose up && rm -rf static
