@@ -1,4 +1,40 @@
-<p>uploaded!</p>
-<div>
-    <p>{{ status }}</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LiveCapital challenge solution</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'uploaddata/upload.css' %}" />
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
+    <style>
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a class="nav-link active" href="#">Home</a>
+        <a class="nav-link" href="{% url 'upload' %}">Upload</a>
+    </nav>
+    <section id="upload-section-1">
+        <div class="container-fluid h-100">
+            <div class="row align-items-center h-100">
+                <div class="mx-auto">
+                    <div class="card mx-auto">
+                        <div class="card-body">
+                            {% if context.status %}
+                                <p><strong>{{ context.message }}</strong></p>
+                                {% for data in context.content %}
+                                    <p>{{ data }}</p>
+                                {% endfor %}
+                            {% else %}
+                                <p><strong>{{ context.message }}</strong></p>
+                            {% endif %}
+                            <a class="btn btn-primary" href="{% url 'index' %}" role="button">Voltar</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

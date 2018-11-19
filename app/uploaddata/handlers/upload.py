@@ -22,19 +22,19 @@ def handle_uploaded_file(f):
                     content.append(item_dict)
             return {
                 'status': ok,
-                'message': "Saved the following uploaded items.",
+                'message': "Foram salvos no banco os seguintes itens:",
                 'content': content
             }
         else:
             return {
                 'status': ok,
-                'message': "File format not recognized."
+                'message': "Não entendi o formato do arquivo..."
             }
 
     except Exception as e:
         return {
             'status': False,
-            'message': "Could not open uploaded file.",
+            'message': "Não consegui abrir o arquivo...",
             'error': e
         }
 

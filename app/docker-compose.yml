@@ -1,3 +1,4 @@
+# http://pawamoy.github.io/2018/02/01/docker-compose-django-postgres-nginx.html
 version: '3'
 
 services:
@@ -19,9 +20,23 @@ services:
       - app
     networks:
       - nginx_network
-
+#
+#  app_db_postgresql:
+#    image: postgres:11.1
+#    env_file:
+#      - config/db/app_db_postgresql.env
+#    networks:
+#      - app_db_postgresql_network
+#    volumes:
+#      - app_db_postgresql_volume:/var/lib/postgresql/data
+#
 networks:
   nginx_network:
     driver: bridge
+#  app_db_postgresql_network:
+#    driver: bridge
+
+volumes:
+  app_db_postgresql_volume: 
 
 

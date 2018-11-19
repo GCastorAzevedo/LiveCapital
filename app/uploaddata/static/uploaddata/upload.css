@@ -3,19 +3,22 @@ html, body {
     margin: 0;
     padding: 0;
 }
-
-#index-section-1 {
-    height: 100vh;
+#upload-section-1 {
+    height: 100%;
     background-color: cadetblue;
 }
 
-/*#index-section-1 .container-fluid {
+/*#upload-section-1 .container-fluid {
     display: flex;
     align-items: center;
     justify-content: center;
 }*/
 
-#index-section-1 .card {
-    width: 350px;
+#upload-section-1 .card {
+    width: 70%;
     border-radius: 5px;
+}
+
+#upload-section-1 .card>p {
+    min-width: 700px;
 }

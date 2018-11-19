@@ -19,7 +19,7 @@ def upload(request):
         form = UploadFileForm(request.POST, request.FILES)
         content = ""
         if form.is_valid():
-            status = handle_uploaded_file(request.FILES['upload_file'])
-            return render(request, 'uploaddata/upload.html', { 'status': status })
+            context = handle_uploaded_file(request.FILES['upload_file'])
+            return render(request, 'uploaddata/upload.html', { 'context': context })
     
     return HttpResponseRedirect('/')
