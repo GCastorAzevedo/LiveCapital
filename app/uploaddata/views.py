@@ -17,9 +17,14 @@ def index(request):
 def upload(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
-        content = ""
         if form.is_valid():
             context = handle_uploaded_file(request.FILES['upload_file'])
             return render(request, 'uploaddata/upload.html', { 'context': context })
-    
+    elif request.method == 'GET':
+        context = {
+            'warning': True,
+            'message': "Forneça um arquivo para upload."
+        }
+        return render(request, 'uploaddata/index.html', { 'context': context })
+
     return HttpResponseRedirect('/app')

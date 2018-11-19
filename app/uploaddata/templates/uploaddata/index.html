@@ -37,6 +37,10 @@
                                         accept=".doc,.csv,.txt,.tab"
                                     />
                                 </div>
+                                <p>{{ context.warning}}</p>
+                                {% if context.warning %}
+                                    <p><strong>{{ context.message }}</strong></p>
+                                {% endif %}
                                 <button type="submit" class="btn btn-primary">Enviar</button>
                             </form>
                         </div>
